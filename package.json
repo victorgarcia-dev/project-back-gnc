@@ -1,0 +1,26 @@
+{
+  "name": "project-back-gnc",
+  "version": "1.0.0",
+  "description": "lógica de negocio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victorgarcia-dev/project-back-gnc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/victorgarcia-dev/project-back-gnc/issues"
+  },
+  "homepage": "https://github.com/victorgarcia-dev/project-back-gnc#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.6.3"
+  }
+}
