@@ -1,0 +1,40 @@
+version: '3'
+services:
+
+    mongo_map:
+        container_name: mongo_map
+        image: mongo:4.2
+        network_mode: bridge
+        env_file:
+            - ../.env_development
+        volumes:
+            - "./data/db:/data/db"
+        ports:
+            - "61116:27017"
+        command: "mongod"
+
+    map_api:
+        container_name: map_api
+        network_mode: bridge
+        links:
+            - "mongo_map:mongo_map"
+        build:
+            context: ../api
+            dockerfile: docker/Dockerfile.development
+            args:
+                port: "41114"
+        volumes:
+            - ../models/:/srv/map/api/models
+            - ../libs/:/srv/map/api/libs
+            - ../api/routes/:/srv/map/api/routes
+            - ../api/api.js/:/srv/map/api/api.js
+            - ../db_tools/:/srv/map/api/db_tools
+        env_file:
+            - ../.env_development
+
+        # restart: always
+        ports:
+            - "41114:41114"
+        environment:
+            WAIT_HOSTS_TIMEOUT: 60
+            WAIT_HOSTS: "mongo_map:27017"
