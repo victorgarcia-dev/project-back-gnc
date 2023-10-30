@@ -29,7 +29,7 @@ class Server {
     //rutas de mi app
     routes() {
         //ruta usuarios
-        this.app.use(this.usersPath, require('../routes/user.route'));
+        this.app.use(this.usersPath, require('../routes/user'));
     }
 
     middleware() {
@@ -40,8 +40,8 @@ class Server {
 
     //escuchar servidor
     listen() {
-        this.app.listen(process.env.PORT || 42000, () => {
-            console.log(`servidor corriendo en el puerto ${process.env.PORT}`);
+        this.app.listen(process.env.API_PORT || 42000, () => {
+            console.log(`servidor corriendo en el puerto ${process.env.API_PORT}`);
         })
     }
 }

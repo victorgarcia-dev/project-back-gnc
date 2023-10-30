@@ -1,8 +1,8 @@
 version: '3'
 services:
 
-    mongo_map:
-        container_name: mongo_map
+    mongo_map_gnc:
+        container_name: mongo_map_gnc
         image: mongo:4.2
         network_mode: bridge
         env_file:
@@ -13,11 +13,11 @@ services:
             - "61116:27017"
         command: "mongod"
 
-    map_api:
-        container_name: map_api
+    map_api_gnc:
+        container_name: map_api_gnc
         network_mode: bridge
         links:
-            - "mongo_map:mongo_map"
+            - "mongo_map_gnc:mongo_map_gnc"
         build:
             context: ../api
             dockerfile: docker/Dockerfile.development
@@ -37,4 +37,4 @@ services:
             - "41114:41114"
         environment:
             WAIT_HOSTS_TIMEOUT: 60
-            WAIT_HOSTS: "mongo_map:27017"
+            WAIT_HOSTS: "mongo_map_gnc:27017"

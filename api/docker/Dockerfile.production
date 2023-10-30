@@ -1,0 +1,19 @@
+FROM node:latest
+
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.2.1/wait /wait
+RUN chmod +x /wait
+
+WORKDIR /srv/map
+COPY api ./api
+
+WORKDIR /srv/map/api
+COPY libs ./libs
+COPY models ./models
+
+ENV NODE_ENV production
+RUN npm install --only=production
+
+ARG port=41114
+EXPOSE $port
+
+CMD /wait && node api.js
